@@ -8,8 +8,13 @@
  */
 var GameConfigs =  {
     debug: true,
+    target: 'game_container',
     guessNum: {
         inputElm: 'uInput',
         resultElm: 'result'
+    },
+
+    simpleGui: {
+        mainFrame: 'main'
     }
 };
