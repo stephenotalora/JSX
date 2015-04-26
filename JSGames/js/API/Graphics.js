@@ -1,9 +1,8 @@
 /**
  * Created by jono on 15-04-23.
  */
-
-var Graphics;
-Graphics = {
+// TODO: REFACTOR TO USE SINGLETON / MODULE PATTERN
+var Graphics = {
     canvas: null,
     canvasWidth: 0,
     canvasHeight: 0,
@@ -95,15 +94,28 @@ Graphics = {
             context.stroke();
         },
 
-        image: function(context, image, width, height){
-            if (!context || !image) { throw 'nothing to draw'; }
+        line: function(context, pointA, pointB, lineWidth, color){
+
+        },
+
+        /**
+         * Simple drawing img implementation
+         * TODO: PRELOAD FROM NETWORK HIT
+         * @param context
+         * @param image
+         * @param position
+         * @param size
+         */
+        image: function(context, image, position, size){
+            if (!context || !image || !position
+                || !Array.isArray(position) || !size || !Array.isArray(size)) { throw 'Graphics - Illegal Argument Exception'; }
 
             // otherwise
-            var self = this;
-            image.addEventListener('load', function(){
-                //context.drawImage(image,width,height);
-                context.drawImage(image, 100,100,width,height);
-            }, false);
+            context.drawImage(
+                image,
+                position[0],position[1],
+                size[0], size[1]
+            );
         }
     }
 };

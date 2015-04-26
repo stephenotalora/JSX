@@ -15,6 +15,6 @@ var GameConfigs =  {
     },
 
     simpleGui: {
-        mainFrame: 'canvas',
+        mainFrame: 'canvas'
     }
 };
