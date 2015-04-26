@@ -1,104 +1,147 @@
 /**
+ * Canvas Module
+ * Singleton design pattern will handle
+ * One instance of the Canvas Object
  * Created by jono on 15-04-25.
  */
-var Canvas  = {
-    canvas: null,
-    width:0,
-    height:0,
-    callback: null,
-    ctx: null,
-    begin: false,
-
+var Canvas = (function(){
+    var mCanvas = null;
+    var mWidth = 0;
+    var mHeight = 0;
+    var mCallback = null;
+    var mCtx = null; // the canvas context
+    var mBegin = false;
+    this.constructor = null;
 
     /**
-     * inits canvas object
-     * @param canvas
-     * @param width
-     * @param height
+     * verify inits was called
      */
-    init: function(canvas, width, height) {
-        if (arguments.length != 3 || canvas == null){
-            throw "Canvas - must initialize canvas";
+    function throwIlligalStateException() {
+        if (!canvas){
+            throw "Canvas - Illegal state exception - did you call init?";
         }
+    }
 
-        // otherwise
-        this.width = width;
-        this.height = height;
-        this.canvas = canvas;
-        this.begin = true;
 
-        return this;
-    },
+    return {
+        /**
+         * inits share instance
+         * @param canvas
+         * @param width
+         * @param height
+         */
+        init: function(canvas, width, height) {
+            if (arguments.length != 3){
+                throw "Canvas - must initialize canvas";
+            }
 
-    /**
-     * Sets main frame color
-     * @param color
-     */
-    setBackgroundColor: function(color) {
-        if (this.canvas && arguments.length && color && color.length){
-            this.canvas.style.backgroundColor = color;
-        }
-    },
+            // ensure there is only one instance of canvas!
+            if (!mCanvas) {
+                mCanvas = canvas;
+                mWidth = width;
+                mHeight = height;
+                mBegin = true;
+            }
 
-    /**
-     * canvas width
-     * @returns {number}
-     */
-    getWidth: function() { return this.width; },
+            return this;
+        },
 
-    /**
-     * canvas height
-     * @returns {number}
-     */
-    getHeight: function() {return this.height; },
+        /**
+         * Sets main frame color
+         * @param color
+         */
+        setBackgroundColor: function(color) {
+            throwIlligalStateException();
+            if (arguments.length && color && color.length){
+                mCanvas.style.backgroundColor = color;
+            }
+        },
 
-    /**
-     * 2D Ctx
-     * @returns {2d Ctx}
-     */
-    get2DCtx: function() {
-        if (this.ctx == null){
-            this.ctx = this.canvas.getContext("2d");
-        }
+        /**
+         * canvas width
+         * @returns {number}
+         */
+        getWidth: function() {
+            throwIlligalStateException();
+            return mWidth;
+        },
 
-        return this.ctx;
-    },
+        /**
+         * canvas height
+         * @returns {number}
+         */
+        getHeight: function() {
+            throwIlligalStateException();
+            return mHeight;
+        },
 
-    /**
-     * 3D Ctx
-     * @returns {webgl}
-     */
-    get3DCtx: function() {
-        if (this.ctx == null) {
-            this.ctx = this.canvas.getContext("webgl");
-        }
+        /**
+         * 2D Ctx
+         * @returns {2d Ctx}
+         */
+        get2DCtx: function(){
+            throwIlligalStateException();
 
-        return this.ctx;
-    },
+            if (!mCtx){
+                mCtx = mCanvas.getContext('2d');
+            }
 
-    /**
-     * draw handler * frames per second
-     * will pass the current context back to draw handler for further end user processing
-     * @param userFunction
-     */
-    setDrawHandler: function(userFunction) {
-        if (typeof userFunction !== 'function'){ throw "must be function for callback"; }
+            return mCtx;
+        },
 
-        // otherwise
-        this.callback = userFunction;
-    },
+        /**
+         * if the context hasn't already been initialized
+         * returns handle to 3D Context
+         * @returns {webgl}
+         */
+        get3DCtx: function() {
+            throwIlligalStateException();
 
-    start: function() {
-        //var self = this;
-        if (this.begin) {
-            this.get2DCtx().clearRect(
-                0, 0,
-                this.getWidth(), this.getHeight()
-            );
-            requestAnimationFrame(this.start.bind(Canvas));
-            this.callback(this.get2DCtx());
-        }
-    },
+            if (!mCtx) {
+                mCtx = mCanvas.getContext('webgl');
+            }
 
-    finish: function() { this.begin = false; }
-};
+            return mCtx;
+        },
+
+        /**
+         * draw handler * frames per second
+         * will pass the current context back to draw handler for further end user processing
+         * @param userFunction
+         */
+        setDrawHandler: function(userFunction) {
+            throwIlligalStateException();
+            if (typeof userFunction !== 'function'){
+                throw "must be function for callback";
+            }
+
+            // otherwise
+            mCallback = userFunction;
+        },
+
+        /**
+         * Important:
+         * This method must be called for several purposes:
+         * 1. initializes main drawing loop utilizing window.requestAnimationFrame
+         * 2. clears the 2D context once per frame refresh
+         * 3. updates api user via callback which passes back the current context which can be use for further drawing processing!
+         */
+        start: function() {
+            throwIlligalStateException();
+
+            if (mBegin) {
+                this.get2DCtx().clearRect(
+                    0, 0,
+                    this.getWidth(), this.getHeight()
+                );
+                requestAnimationFrame(this.start.bind(Canvas));
+                mCallback(this.get2DCtx());
+            }
+        },
+
+        /**
+         * not mandatory but can be call for cleanup purposes
+         */
+        finish: function() { mBegin = false; }
+    }
+})();

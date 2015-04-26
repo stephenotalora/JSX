@@ -7,8 +7,7 @@ Graphics = {
     canvas: null,
     canvasWidth: 0,
     canvasHeight: 0,
-    config: GameConfigs,
-    begin: true,
+    util: GameUtil,
 
     /**
      * just to provide some structure
@@ -39,18 +38,18 @@ Graphics = {
         }
 
         // otherwise
-        var target = document.getElementById(this.config.target);
+        var target = document.getElementById(this.util.config.target);
         if (target) {
             if (name && name.length) {
                 document.title = name;
             }
 
             // check if canvas already exists
-            this.canvas = document.getElementById(this.config.simpleGui.mainFrame);
+            this.canvas = document.getElementById(this.util.config.simpleGui.mainFrame);
             if (!this.canvas) {
                 setSizeValue(this, width, height);
                 this.canvas = document.createElement('canvas');
-                this.canvas.id = this.config.simpleGui.mainFrame;
+                this.canvas.id = this.util.config.simpleGui.mainFrame;
                 this.canvas.width = this.canvasWidth;
                 this.canvas.height = this.canvasHeight;
                 target.appendChild(this.canvas);
@@ -70,9 +69,10 @@ Graphics = {
         return Graphics.getCanvas();
     },
 
-    loadImage: function(url) {
+    loadImage:function(uri){
+        if(!uri || typeof uri !== 'string' || !uri.length){ throw 'Graphics - Invalid arugment exception' ;}
         var image = new Image();
-        image.src = url;
+        image.src = uri;
         return image;
     },
 
@@ -95,12 +95,15 @@ Graphics = {
             context.stroke();
         },
 
-        image: function(context, img, width, height){
-            if (!context || !img) { throw 'nothing to draw'; }
+        image: function(context, image, width, height){
+            if (!context || !image) { throw 'nothing to draw'; }
 
             // otherwise
-            context.drawImage(img,width,height);
-
+            var self = this;
+            image.addEventListener('load', function(){
+                //context.drawImage(image,width,height);
+                context.drawImage(image, 100,100,width,height);
+            }, false);
         }
     }
 };
