@@ -22,10 +22,12 @@ var Canvas  = {
         }
 
         // otherwise
-        this.canvas = canvas;
         this.width = width;
         this.height = height;
+        this.canvas = canvas;
         this.begin = true;
+
+        return this;
     },
 
     /**
@@ -34,8 +36,7 @@ var Canvas  = {
      */
     setBackgroundColor: function(color) {
         if (this.canvas && arguments.length && color && color.length){
-            this.get2DCtx().fillStyle = color;
-            this.get2DCtx().fillRect(0,0, this.getWidth(), this.getHeight());
+            this.canvas.style.backgroundColor = color;
         }
     },
 
@@ -88,17 +89,14 @@ var Canvas  = {
     },
 
     start: function() {
-        var self = this;
-        if (self.begin) {
+        //var self = this;
+        if (this.begin) {
+            this.get2DCtx().clearRect(
+                0, 0,
+                this.getWidth(), this.getHeight()
+            );
             requestAnimationFrame(this.start.bind(Canvas));
-            setTimeout(function () {
-                this.callback(self.get2DCtx());
-                self.get2DCtx().clearRect(
-                    0, 0,
-                    self.getWidth(), self.getHeight()
-                );
-                canvas.setBackgroundColor(self.get2DCtx().fillStyle);
-            }, 1000 / 60);
+            this.callback(this.get2DCtx());
         }
     },
 
