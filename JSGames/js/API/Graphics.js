@@ -70,6 +70,12 @@ Graphics = {
         return Graphics.getCanvas();
     },
 
+    loadImage: function(url) {
+        var image = new Image();
+        image.src = url;
+        return image;
+    },
+
     draw: {
         circle: function(context, centerPoint, radius, lineWidth, lineColor, fillColor) {
             if (arguments.length < 4) throw 'Graphics - insufficient args, must pass context, point, radius, line width';
@@ -87,6 +93,14 @@ Graphics = {
             context.lineWidth = lineWidth;
             context.strokeStyle = lineColor === undefined ? 'white' : lineColor;
             context.stroke();
+        },
+
+        image: function(context, img, width, height){
+            if (!context || !img) { throw 'nothing to draw'; }
+
+            // otherwise
+            context.drawImage(img,width,height);
+
         }
     }
 };
