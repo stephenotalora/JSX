@@ -108,7 +108,7 @@ var Graphics  = {
      * @param height
      */
     createCanvas: function(name, width, height) {
-        if(arguments.length != 3) { throw "unable to create frame"; }
+        if(arguments.length != 3) { throw "Graphics - unable to create frame"; }
 
         // otherwise
         var target = document.getElementById(this.config.target);
@@ -133,7 +133,7 @@ var Graphics  = {
                 self.canvasWidth = width;
                 self.canvasHeight = height;
             } else {
-                throw "Invalid width and height for canvas, must must be greater than 100px for width and height";
+                throw "Graphics - Invalid width and height for canvas, must must be greater than 100px for width and height";
             }
         }
 
