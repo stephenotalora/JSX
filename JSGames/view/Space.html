@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guess The Number</title>
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/layout/layout.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans">
+</head>
+<body>
+
+    <!-- BEGIN NAVBAR -->
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">JS Games</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- END NAVBAR -->
+
+    <div class="container">
+        <div class="container-fluid" style='background-color: #FFF;'>
+            <div id="game_container"></div>
+        </div>
+    </div>
+
+
+<!-- Script Includes For Space Game -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/bootstrap/bootstrap.js"></script>
+<script src="../js/configs/GameConfigs.js"></script>
+<script src="../js/util/GameUtil.js"></script>
+<script src="../js/API/Graphics.js"></script>
+<script src="../js/API/Canvas.js"></script>
+<script type="text/javascript">
+    var direction = [100,100];
+    var image = Graphics.loadImage('http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/nebula_blue.f2014.png');
+    var canvas = Graphics.createCanvas("Space Ship", 900, 600);
+    canvas.setBackgroundColor("black");
+    canvas.setDrawHandler(function(ctx){
+        //Graphics.draw.image(ctx, canvas.getWidth(), canvas.getHeight());
+        Graphics.draw.image(ctx,image,canvas.getWidth(), canvas.getHeight());
+        Graphics.draw.circle(ctx, direction, 40, 2,'black', 'white');
+        direction[1] += 10;
+    });
+    canvas.start();
+</script>
+<!-- End Script Includes -->
+</body>
+</html>
