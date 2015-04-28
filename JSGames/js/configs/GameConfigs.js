@@ -14,6 +14,13 @@ var GameConfigs =  {
         resultElm: 'result'
     },
 
+    pong: {
+       throttleVel: 15,
+        mainRadius: 30,
+        lPadColor: '#7FFF00',
+        rPadColor: '#1E90FF'
+    },
+
     simpleGui: {
         mainFrame: 'canvas'
     }

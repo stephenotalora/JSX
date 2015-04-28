@@ -8,16 +8,19 @@ var Canvas = (function(){
     var mCanvas = null;
     var mWidth = 0;
     var mHeight = 0;
-    var mCallback = null;
     var mCtx = null; // the canvas context
     var mBegin = false;
+    var mCallback = null;
     this.constructor = null;
+    var animationDidStop = function() {
+        return 'did finish all animations!';
+    }
 
     /**
      * verify inits was called
      */
     function throwIlligalStateException() {
-        if (!canvas){
+        if (!mCanvas){
             throw "Canvas - Illegal state exception - did you call init?";
         }
     }
@@ -44,6 +47,14 @@ var Canvas = (function(){
             }
 
             return this;
+        },
+
+        /**
+         * gives focus to the canvas to listen for registered events
+         */
+        focus:function() {
+            throwIlligalStateException();
+            mCanvas.focus();
         },
 
         /**
@@ -119,6 +130,39 @@ var Canvas = (function(){
             mCallback = userFunction;
         },
 
+        registerKeyDownListener: function(onKeyDown){
+            throwIlligalStateException();
+            if (typeof onKeyDown !== 'function'){
+                throw 'must be function for callback';
+            }
+
+            // otherwise
+            mCanvas.addEventListener('keydown',onKeyDown,false);
+        },
+
+        registerKeyUpListener: function(onKeyUp){
+            throwIlligalStateException();
+            if (typeof onKeyUp !== 'function'){
+                throw 'must be function for callback';
+            }
+
+            // otherwise
+            mCanvas.addEventListener('keyup', onKeyUp, false);
+        },
+
+        getKeyMap: function() {
+            return {
+                87:'W',
+                83:'S',
+                65:'A',
+                68:'D',
+                37:'LEFT',
+                38:'UP',
+                39:'RIGHT',
+                40:'DOWN'
+            };
+        },
+
         /**
          * Important:
          * This method must be called for several purposes:
@@ -136,12 +180,18 @@ var Canvas = (function(){
                 );
                 requestAnimationFrame(this.start.bind(Canvas));
                 mCallback(this.get2DCtx());
+            } else {
+                console.log(animationDidStop());
             }
         },
 
         /**
          * not mandatory but can be call for cleanup purposes
          */
-        finish: function() { mBegin = false; }
+        finish: function() {
+            mBegin = false;
+            console.log('attempting to stop animations...');
+            return true;
+        }
     }
 })();
