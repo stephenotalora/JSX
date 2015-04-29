@@ -15,7 +15,7 @@ var GameConfigs =  {
     },
 
     pong: {
-       throttleVel: 15,
+       throttleVel: 20,
         mainRadius: 30,
         lPadColor: '#7FFF00',
         rPadColor: '#1E90FF'
