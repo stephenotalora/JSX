@@ -1,5 +1,5 @@
 /**
- * Created by jono on 15-04-18.
+ * Created by jonathan otalora - A00894017 on 15-04-18.
  */
 var GameUtil = {
     config: GameConfigs,

@@ -1,42 +1,58 @@
 /**
- * Created by jotalora on 15-04-26.
+ * Created by jonathan otalora - A00894017 on 15-04-26.
  */
 var Pong = (function(){
     var canvas = null;
     var util = GameUtil;
-    var PAD_WIDTH = 8,   PAD_HEIGHT = 80;
-    var TABLE_WIDTH = 0, TABLE_HEIGHT = 0;
-    var SCALE_FACTOR = 2;
-    var paddle_L_pos = null, paddle_R_pos = null, ball_pos = null;
-    var paddle_L_vel = 0, paddle_R_vel = 0;
-    var ballRadius = 0, isFullRadius = false;
+    var PAD_WIDTH = util.config.pong.PAD_WIDTH;
+    var PAD_HEIGHT = util.config.pong.PAD_HEIGHT;
+    var TABLE_WIDTH = 0, TABLE_HEIGHT = 0, SCALE_FACTOR = 2;
+
+    var leftPaddle = null, paddle_L_vel=0;
+    var rightPaddle = null, paddle_R_vel=0;
+    var ball = null;
     var keyMap = null;
 
     // private methods
+    /**
+     * simple math to position elements on the table
+     */
     function initGameElms(){
         // table dimensions
         TABLE_WIDTH = canvas.getWidth();
         TABLE_HEIGHT = canvas.getHeight();
 
         // paddles
-        var HALF_PAD_HEIGHT = PAD_HEIGHT / 2;
-        var HALF_TABLE_HEIGHT = TABLE_HEIGHT / 2;
+        var HALF_PAD_HEIGHT =  PAD_HEIGHT / SCALE_FACTOR;
+        var HALF_TABLE_HEIGHT = TABLE_HEIGHT / SCALE_FACTOR;
 
         var yStart = HALF_TABLE_HEIGHT - HALF_PAD_HEIGHT;
         var yEnd   = (HALF_TABLE_HEIGHT + PAD_HEIGHT) - HALF_PAD_HEIGHT;
-        paddle_L_pos = [ // initial left paddle position
+        var paddle_L_pos = [ // initial left paddle position
             [1, yStart], // start at pos x = 1, y = MIDDLE OF TABLE - THE HALF THE PAD OF PADDLE
             [1, yEnd] // end at x = 1, y = HALF OF TABLE + THE OTHER HALF OF PAD.
         ];
+        leftPaddle = new Paddle(
+            paddle_L_pos, paddle_L_vel,
+            util.config.pong.PAD_WIDTH,
+            util.config.pong.lPadColor
+        );
 
         var xPos = TABLE_WIDTH - 1;
-        paddle_R_pos = [
+        var paddle_R_pos = [
             [xPos, yStart], [xPos, yEnd]
         ];
+        rightPaddle = new Paddle(
+            paddle_R_pos, paddle_R_vel,
+            util.config.pong.PAD_WIDTH,
+            util.config.pong.rPadColor
+        );
 
-        // ball initial position
-        ball_pos = [TABLE_WIDTH/2, TABLE_HEIGHT/2];
-        ballRadius = util.config.pong.mainRadius;
+        // init ball
+        ball = new Ball(
+            [TABLE_WIDTH/2, TABLE_HEIGHT/2], 0,
+            util.config.pong.mainRadius
+        );
     }
 
     function initPongTable(ctx) {
@@ -65,36 +81,13 @@ var Pong = (function(){
 
     function draw(ctx){
         initPongTable(ctx);
-
-        drawBall(ctx);
+        ball.draw(ctx, true);
 
         // perform logic here
-        updatePaddlePos(paddle_L_pos, paddle_L_vel);
-        updatePaddlePos(paddle_R_pos, paddle_R_vel);
-        drawPaddles(ctx);
-    }
-
-    function drawPaddles(ctx) {
-        Graphics.draw.line(ctx,
-            paddle_L_pos[0], paddle_L_pos[1],
-            PAD_WIDTH, util.config.pong.rPadColor
-        );
-
-        Graphics.draw.line(ctx,
-            paddle_R_pos[0], paddle_R_pos[1],
-            PAD_WIDTH, util.config.pong.lPadColor
-        );
-    }
-
-    function drawBall(ctx){
-        if (!isFullRadius){
-            drawBall.increment = ++drawBall.increment || 0;
-            Graphics.draw.circle(ctx, ball_pos, drawBall.increment);
-            if(drawBall.increment == ballRadius) isFullRadius = true;
-        } else {
-            Graphics.draw.circle(ctx, ball_pos, ballRadius);
-            drawBall.increment = 0; // cleanup!
-        }
+        updatePaddlePos(leftPaddle.getPosition(), paddle_L_vel);
+        updatePaddlePos(rightPaddle.getPosition(), paddle_R_vel);
+        leftPaddle.draw(ctx);
+        rightPaddle.draw(ctx);
     }
 
     function updatePaddlePos(paddlePos, paddleVel){

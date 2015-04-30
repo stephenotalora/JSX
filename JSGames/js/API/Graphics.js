@@ -1,5 +1,5 @@
 /**
- * Created by jono on 15-04-23.
+ * Created by jonathan otalora - A00894017 on 15-04-23.
  */
 // TODO: REFACTOR TO USE SINGLETON / MODULE PATTERN
 var Graphics = (function(){
