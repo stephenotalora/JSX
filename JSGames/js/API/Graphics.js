@@ -28,13 +28,22 @@ var Graphics = (function(){
          * @param width
          * @param height
          */
-        createCanvas: function (name, size) {
-            if (arguments.length != 2 || !size || !Array.isArray(size)) {
+        createCanvas: function (name, size, childOfNodeId, id) {
+            if (arguments.length != 4 || !size || !Array.isArray(size)) {
                 throw "Graphics - unable to create frame";
             }
 
+            var target = null;
+            if (typeof childOfNodeId === 'string') {
+                throw 'cannot attach canvas to target';
+            } else {
+                target = document.getElementById(childOfNodeId);
+                if (!target) {
+                    throw 'undefined target ~ cannot append canvas to target';
+                }
+            }
+
             // otherwise
-            var target = document.getElementById(mUtil.config.target);
             if (target) {
                 if (name && name.length) {
                     document.title = name;
@@ -45,7 +54,7 @@ var Graphics = (function(){
                 if (!canvas) {
                     setSizeValue(size[0], size[1]);
                     mCanvas = document.createElement('canvas');
-                    mCanvas.id = mUtil.config.simpleGui.mainFrame;
+                    mCanvas.id = id;
                     mCanvas.width = mCanvasWidth;
                     mCanvas.height = mCanvasHeight;
                     mCanvas.setAttribute('tabindex','0');

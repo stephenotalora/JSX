@@ -7,7 +7,7 @@
  * @param child
  * @param parent
  */
-function inherits(child, parent){ // inheritance chain
+function extend(child, parent){ // inheritance chain
     child.prototype = Object.create(parent.prototype);
     child.prototype.constructor = child;
 }
@@ -20,7 +20,7 @@ function inherits(child, parent){ // inheritance chain
  *****************************************************************************/
 function PongObject(initPos, initVel, color) {
     if (arguments.length < 3) { throw 'Illegal state exception'; }
-    else if (!Array.isArray(initPos) || typeof initVel !== 'number') {
+    else if (!Array.isArray(initPos)) {
         throw 'Illegal argument exception';
     }
 
@@ -53,7 +53,7 @@ PongObject.prototype.toString = function() {
 /*****************************************************************************
  * Paddle blue-print
  *****************************************************************************/
-inherits(Paddle, PongObject); // inheritance chain
+extend(Paddle, PongObject); // inheritance chain
 function Paddle(initPos, initVel, width, color) { // Default ctor for Paddle Object
     PongObject.call(this, initPos, initVel, color); // init super
 
@@ -109,7 +109,7 @@ Paddle.prototype.toString = function() {
 /*****************************************************************************
  * Ball blue-print
  *****************************************************************************/
-inherits(Ball, PongObject);
+extend(Ball, PongObject);
 function Ball(initPos, initVel, radius, color) {
     PongObject.call(this, initPos, initVel, color); // init super!
 
@@ -120,14 +120,17 @@ function Ball(initPos, initVel, radius, color) {
 
 // accessor
 Ball.prototype.getRadius = function() { return this.radius; }
+Ball.prototype.resetAnimation = function() { this.reachedTargetRadius = false; }
 
 /**
  * draw
  * second param simple animates circle from radius 0 to target radius
+ * fires call back 1/2 a second after animation has completed - this is to ensure a proper transition
  * @param ctx
  * @param hasAnimation
+ * @param callBack
  */
-Ball.prototype.draw = function(ctx, hasAnimation){
+Ball.prototype.draw = function(ctx, hasAnimation, callBack){
     if (!ctx) { throw 'cannot draw Ball on canvas - did you pass the canvas context?' }
     if (!hasAnimation) { drawCircle(this, this.getRadius()); }
 
@@ -135,9 +138,19 @@ Ball.prototype.draw = function(ctx, hasAnimation){
     if (!this.reachedTargetRadius) {
         Ball.prototype.draw.incrementStep = ++Ball.prototype.draw.incrementStep || 0;
         drawCircle(this, Ball.prototype.draw.incrementStep);
-        if (Ball.prototype.draw.incrementStep == this.getRadius()) { this.reachedTargetRadius = true; }
-    } else { drawCircle(this, this.getRadius()); }
+        if (Ball.prototype.draw.incrementStep == this.getRadius()) {
+            this.reachedTargetRadius = true;
+            setTimeout(callBack, 500);
+        }
+    } else {
+        drawCircle(this, this.getRadius());
+        callBack(); // keep firing callback for user generated animations
+        if (Ball.prototype.draw.incrementStep != 0) { // cleanup
+            Ball.prototype.draw.incrementStep = 0;
+        }
+    }
 
+    // closure to simplify ccode
     function drawCircle(self, radius) {
         Graphics.draw.circle(ctx, self.getPosition(), radius);
     }
