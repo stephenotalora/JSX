@@ -3,11 +3,10 @@
  * Though there could be many canvas - limit to one graphics and canvas api
  * TODO: should refactor for many instances of canvas and graphics api????
  */
-var Graphics = (function(){
+var GraphicsManager = (function(){
     var mCanvas = null;
     var mCanvasWidth = 0;
     var mCanvasHeight = 0;
-    var mUtil = GameUtil;
 
     function getCanvas() {
         if (!mCanvas) {
@@ -30,9 +29,9 @@ var Graphics = (function(){
          */
         createCanvas: function (name, parentNodeId, id, size) {
             if (arguments.length < 3) {
-                throw "Graphics - unable to create frame";
+                throw "GraphicsManager - unable to create frame";
             } else if (arguments.length == 4 && (!size || !Array.isArray(size))) {
-                throw "Graphics - invalid argument exception";
+                throw "GraphicsManager - invalid argument exception";
             }
 
 
@@ -74,7 +73,7 @@ var Graphics = (function(){
                     mCanvasWidth = width;
                     mCanvasHeight = height;
                 } else {
-                    throw "Graphics - Invalid width and height for canvas, must must be greater than 100px for width and height";
+                    throw "GraphicsManager - Invalid width and height for canvas, must must be greater than 100px for width and height";
                 }
             }
 
@@ -88,7 +87,7 @@ var Graphics = (function(){
          */
         loadImage: function (uri) {
             if (!uri || typeof uri !== 'string' || !uri.length) {
-                throw 'Graphics - Invalid arugment exception';
+                throw 'GraphicsManager - Invalid arugment exception';
             }
             var image = new Image();
             image.src = uri;
@@ -96,12 +95,12 @@ var Graphics = (function(){
         },
 
         /**
-         * Graphics.draw - build-in object to handle drawing in the canvas
+         * GraphicsManager.draw - build-in object to handle drawing in the canvas
          */
         draw: {
             font: function(context, str, pos, width, font, size, fill, color) {
-                if (!context){ throw 'Graphics - draw font requires context and position'; }
-                else if (!str || !str.length || !pos || !Array.isArray(pos)) { throw 'Graphics - Illegal argument exception'; }
+                if (!context){ throw 'GraphicsManager - draw font requires context and position'; }
+                else if (!str || !str.length || !pos || !Array.isArray(pos)) { throw 'GraphicsManager - Illegal argument exception'; }
 
                 // otherwise
                 context.font = size + "px " + (!font || !font.length ? 'serif' : font);
@@ -126,9 +125,9 @@ var Graphics = (function(){
              */
             circle: function (context, centerPoint, radius, lineWidth, lineColor, fillColor) {
                 if(arguments.length < 3) {
-                    throw 'Graphics - draw circle requires context, center point and radius';
+                    throw 'GraphicsManager - draw circle requires context, center point and radius';
                 } else if(!context || !centerPoint || !Array.isArray(centerPoint) || !typeof radius === 'number' || radius < 0){
-                    throw 'Graphics - invalid argument exception';
+                    throw 'GraphicsManager - invalid argument exception';
                 }
 
                 context.beginPath();
@@ -154,9 +153,9 @@ var Graphics = (function(){
              */
             line: function (context, pointA, pointB, lineWidth, color) {
                 if (arguments.length < 3){
-                    throw 'Graphics - draw line requires context, and points to begin and end line';
+                    throw 'GraphicsManager - draw line requires context, and points to begin and end line';
                 } else if (!context || !pointA || !Array.isArray(pointA) || !pointB || !Array.isArray(pointA)){
-                    throw 'Graphics - Illegal argument exception';
+                    throw 'GraphicsManager - Illegal argument exception';
                 }
 
                 // otherwise
@@ -180,7 +179,7 @@ var Graphics = (function(){
             image: function (context, image, position, size) {
                 if (!context || !image || !position
                     || !Array.isArray(position) || !size || !Array.isArray(size)) {
-                    throw 'Graphics - Illegal Argument Exception';
+                    throw 'GraphicsManager - Illegal Argument Exception';
                 }
 
                 // otherwise

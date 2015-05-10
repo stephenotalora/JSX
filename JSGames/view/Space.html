@@ -49,17 +49,17 @@
 <script src="../content/js/bootstrap/bootstrap.js"></script>
 <script src="../content/js/configs/GameConfigs.js"></script>
 <script src="../content/js/util/GameUtil.js"></script>
-<script src="../content/js/API/Graphics.js"></script>
+<script src="../content/js/API/GraphicsManager.js"></script>
 <script src="../content/js/API/Canvas.js"></script>
 <script type="text/javascript">
-    var image = Graphics.loadImage('../images/nebula_blue.f2014.png');
-    var canvas = Graphics.createCanvas("Space Ship", 900, 600);
+    var image = GraphicsManager.loadImage('../images/nebula_blue.f2014.png');
+    var canvas = GraphicsManager.createCanvas("Space Ship", 900, 600);
     canvas.setBackgroundColor("black");
     var direction = [canvas.getWidth()/2,canvas.getHeight()/2];
     var velocity = [-80.0/60, 10.0/60];
     canvas.setDrawHandler(function(ctx){
-        Graphics.draw.image(ctx,image,[0,0],[canvas.getWidth(), canvas.getHeight()]);
-        Graphics.draw.circle(ctx, direction, 40, 2,'black', 'white');
+        GraphicsManager.draw.image(ctx,image,[0,0],[canvas.getWidth(), canvas.getHeight()]);
+        GraphicsManager.draw.circle(ctx, direction, 40, 2,'black', 'white');
         direction[0] += velocity[0];
         direction[1] += velocity[1];
     });

@@ -86,7 +86,7 @@ Paddle.prototype.draw = function(ctx) {
     if (!ctx) { throw 'cannot draw Paddle on canvas - did you pass the canvas context?'; }
 
     // otherwise draw the object
-    Graphics.draw.line(
+    GraphicsManager.draw.line(
         ctx,
         this.getPosition()[0],
         this.getPosition()[1],
@@ -152,7 +152,7 @@ Ball.prototype.draw = function(ctx, hasAnimation, callBack){
 
     // closure to simplify ccode
     function drawCircle(self, radius) {
-        Graphics.draw.circle(ctx, self.getPosition(), radius);
+        GraphicsManager.draw.circle(ctx, self.getPosition(), radius);
     }
 }
 

@@ -64,21 +64,21 @@ var Pong = (function(){
      */
     function initPongTable(ctx) {
         // draw middle of table:
-        Graphics.draw.line(ctx,
+        GraphicsManager.draw.line(ctx,
             [TABLE_WIDTH/2,0],
             [TABLE_WIDTH/2, TABLE_HEIGHT],
             SCALE_FACTOR
         );
 
         // draw gutters:
-        Graphics.draw.line( // left gutter
+        GraphicsManager.draw.line( // left gutter
             ctx,
             [PAD_WIDTH, 0],
             [PAD_WIDTH, TABLE_HEIGHT],
             SCALE_FACTOR
         );
 
-        Graphics.draw.line( // right gutter
+        GraphicsManager.draw.line( // right gutter
             ctx,
             [TABLE_WIDTH - PAD_WIDTH, 0],
             [TABLE_WIDTH - PAD_WIDTH, TABLE_HEIGHT],
@@ -101,14 +101,14 @@ var Pong = (function(){
         rightPaddle.draw(ctx);
 
         var rscore = String(rightPlayerScore);
-        Graphics.draw.font(ctx,
+        GraphicsManager.draw.font(ctx,
             rightPlayerScore < 10 ? 0 + rscore : rscore,
             [TABLE_WIDTH/2 + 20, 50], 50,
             'Consolas', 50, true
         );
 
         var lscore = String(leftPlayerScore);
-        Graphics.draw.font(ctx, leftPlayerScore < 10 ? 0 + lscore : lscore,
+        GraphicsManager.draw.font(ctx, leftPlayerScore < 10 ? 0 + lscore : lscore,
             [TABLE_WIDTH/2 - 80, 50], 50,
             'Consolas', 50, true
         );
@@ -268,7 +268,7 @@ var Pong = (function(){
 
     return {
         init: function () {
-            canvas = Graphics.createCanvas(
+            canvas = GraphicsManager.createCanvas(
                 "Pong",
                 util.config.pong.targetNode,
                 util.config.pong.mainFrame,
