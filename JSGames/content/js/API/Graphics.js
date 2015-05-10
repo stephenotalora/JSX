@@ -1,7 +1,8 @@
 /**
  * Created by jonathan otalora - A00894017 on 15-04-23.
+ * Though there could be many canvas - limit to one graphics and canvas api
+ * TODO: should refactor for many instances of canvas and graphics api????
  */
-// TODO: REFACTOR TO USE SINGLETON / MODULE PATTERN
 var Graphics = (function(){
     var mCanvas = null;
     var mCanvasWidth = 0;
@@ -25,19 +26,21 @@ var Graphics = (function(){
         /**
          * creates main frame for games
          * @param name
-         * @param width
-         * @param height
+         * @param size - array in terms of width and height
          */
-        createCanvas: function (name, size, childOfNodeId, id) {
-            if (arguments.length != 4 || !size || !Array.isArray(size)) {
+        createCanvas: function (name, parentNodeId, id, size) {
+            if (arguments.length < 3) {
                 throw "Graphics - unable to create frame";
+            } else if (arguments.length == 4 && (!size || !Array.isArray(size))) {
+                throw "Graphics - invalid argument exception";
             }
 
+
             var target = null;
-            if (typeof childOfNodeId === 'string') {
+            if (typeof parentNodeId !== 'string') {
                 throw 'cannot attach canvas to target';
             } else {
-                target = document.getElementById(childOfNodeId);
+                target = document.getElementById(parentNodeId);
                 if (!target) {
                     throw 'undefined target ~ cannot append canvas to target';
                 }
@@ -50,8 +53,8 @@ var Graphics = (function(){
                 }
 
                 // check if canvas already exists
-                canvas = document.getElementById(mUtil.config.simpleGui.mainFrame);
-                if (!canvas) {
+                mCanvas = document.getElementById(id);
+                if (!mCanvas) {
                     setSizeValue(size[0], size[1]);
                     mCanvas = document.createElement('canvas');
                     mCanvas.id = id;
@@ -59,6 +62,9 @@ var Graphics = (function(){
                     mCanvas.height = mCanvasHeight;
                     mCanvas.setAttribute('tabindex','0');
                     target.appendChild(mCanvas);
+                } else { // canvas embedded in html
+                    //TODO: needs testing...
+                    setSizeValue(mCanvas.width, mCanvas.height);
                 }
             }
 
@@ -75,6 +81,11 @@ var Graphics = (function(){
             return getCanvas();
         },
 
+        /**
+         * loads / caches images
+         * @param uri
+         * @returns {*}
+         */
         loadImage: function (uri) {
             if (!uri || typeof uri !== 'string' || !uri.length) {
                 throw 'Graphics - Invalid arugment exception';
@@ -84,7 +95,26 @@ var Graphics = (function(){
             return image;
         },
 
+        /**
+         * Graphics.draw - build-in object to handle drawing in the canvas
+         */
         draw: {
+            font: function(context, str, pos, width, font, size, fill, color) {
+                if (!context){ throw 'Graphics - draw font requires context and position'; }
+                else if (!str || !str.length || !pos || !Array.isArray(pos)) { throw 'Graphics - Illegal argument exception'; }
+
+                // otherwise
+                context.font = size + "px " + (!font || !font.length ? 'serif' : font);
+                if (fill) {
+                    context.fillText(str, pos[0], pos[1]);
+                    context.fillStyle = (!color ? 'white' : color[0]);
+                }
+                else {
+                    context.strokeText(str, pos[0], pos[1]);
+                    context.strokeStyle = (!color ? 'white' : color[1]);
+                }
+            },
+
             /**
              *
              * @param context       - required
@@ -95,7 +125,7 @@ var Graphics = (function(){
              * @param fillColor     - no fill if non provided
              */
             circle: function (context, centerPoint, radius, lineWidth, lineColor, fillColor) {
-                if(arguments.length != 3) {
+                if(arguments.length < 3) {
                     throw 'Graphics - draw circle requires context, center point and radius';
                 } else if(!context || !centerPoint || !Array.isArray(centerPoint) || !typeof radius === 'number' || radius < 0){
                     throw 'Graphics - invalid argument exception';
@@ -141,7 +171,7 @@ var Graphics = (function(){
 
             /**
              * Simple drawing img implementation
-             * TODO: PRELOAD FROM NETWORK HIT
+             * TODO: PRE-LOAD FROM NETWORK HIT?
              * @param context
              * @param image
              * @param position

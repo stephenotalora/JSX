@@ -15,7 +15,7 @@ function extend(child, parent){ // inheritance chain
 /*****************************************************************************
  * Parent of all Interactive Pong Objects
  * @param initPos
- * @param initVel
+ * @param initVel ~ flexible may pack in a number or array :) - I <3 javascript!
  * @constructor
  *****************************************************************************/
 function PongObject(initPos, initVel, color) {
@@ -34,12 +34,13 @@ function PongObject(initPos, initVel, color) {
 PongObject.prototype.getPosition = function() { return this.position; }
 PongObject.prototype.getVelocity = function() { return this.velocity; }
 PongObject.prototype.getColor = function() { return this.color; }
+PongObject.prototype.setColor = function(color) { this.color = color; }
 PongObject.prototype.setPosition = function(pos) {
     if (!pos || !Array.isArray(pos)){ throw 'Illegal argument exception'; }
     this.position = pos;
 }
 PongObject.prototype.setVelocity = function(vel) {
-    if (typeof vel !== 'number') { throw 'Illegal argument exception'; }
+    if (typeof vel !== 'number' || !Array.isArray(vel)) { throw 'Illegal argument exception'; }
     this.velocity = vel;
 }
 PongObject.prototype.toString = function() {
@@ -102,7 +103,6 @@ Paddle.prototype.toString = function() {
     return "Paddle-" + this.getInsanceCount() + " = { " +
         PongObject.prototype.toString.call(this) +
             ", width: " + this.width +
-            ", height: " + this.height +
             " }" ;
 }
 

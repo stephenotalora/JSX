@@ -8,21 +8,19 @@
  */
 var GameConfigs =  {
     debug: true,
-    target: 'game_container',
     guessNum: {
         inputElm: 'uInput',
         resultElm: 'result'
     },
 
     pong: {
-       throttleVel: 20,
-        mainRadius: 30,
+        targetNode: 'game_container',
+        mainFrame: 'canvas',
+        throttleVel: 10.5,
+        ballRadius: 25,
         lPadColor: '#7FFF00',
         rPadColor: '#1E90FF',
-        PAD_WIDTH: 8, PAD_HEIGHT: 80
-    },
-
-    simpleGui: {
-        mainFrame: 'canvas'
+        PAD_WIDTH: 8.0, PAD_HEIGHT: 80.0,
+        TABLE_WIDTH:900.0, TABLE_HEIGHT:600.0
     }
 };
