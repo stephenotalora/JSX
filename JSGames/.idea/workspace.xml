@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="912dd3d6-e75b-47e6-9a00-613abd9e67b2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/content/js/API/Audio.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/content/js/API/Graphics.js" afterPath="$PROJECT_DIR$/content/js/API/GraphicsManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/js/games/Pong/PongObjects.js" afterPath="$PROJECT_DIR$/content/js/games/Pong/PongObjects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/Space.html" afterPath="$PROJECT_DIR$/view/Space.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/content/audio/4391__noisecollector__pongblipf-5.wav" afterPath="$PROJECT_DIR$/content/audio/blip.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/js/API/Audio.js" afterPath="$PROJECT_DIR$/content/js/API/Audio.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/pong.html" afterPath="$PROJECT_DIR$/view/pong.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/js/games/Pong/pong.js" afterPath="$PROJECT_DIR$/content/js/games/Pong/pong.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -41,11 +39,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="pong.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="pong.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/view/pong.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.8756757">
-                  <caret line="54" column="90" selection-start-line="54" selection-start-column="90" selection-end-line="54" selection-end-column="90" />
+                <state vertical-scroll-proportion="-36.875">
+                  <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
@@ -83,11 +81,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="pong.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="pong.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/content/js/games/Pong/pong.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-21.555555">
-                  <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
+                <state vertical-scroll-proportion="0.49886104">
+                  <caret line="172" column="10" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="10" />
                   <folding>
                     <element signature="e#0#63#0" expanded="false" />
                   </folding>
@@ -144,8 +142,8 @@
           <file leaf-file-name="Audio.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/content/js/API/Audio.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.11064278">
-                  <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.18973215">
+                  <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
                   <folding>
                     <element signature="n#!!doc;n#Audio#0" expanded="false" />
                   </folding>
@@ -204,12 +202,12 @@
         <option value="$PROJECT_DIR$/content/css/layout/layout.css" />
         <option value="$PROJECT_DIR$/content/js/games/Pong/PongObjects.js" />
         <option value="$PROJECT_DIR$/content/js/util/GameUtil.js" />
-        <option value="$PROJECT_DIR$/content/js/games/Pong/pong.js" />
         <option value="$PROJECT_DIR$/content/js/API/Graphics.js" />
-        <option value="$PROJECT_DIR$/view/pong.html" />
         <option value="$PROJECT_DIR$/content/js/API/GraphicsManager.js" />
         <option value="$PROJECT_DIR$/content/js/API/SoundManager.js" />
+        <option value="$PROJECT_DIR$/view/pong.html" />
         <option value="$PROJECT_DIR$/content/js/API/Audio.js" />
+        <option value="$PROJECT_DIR$/content/js/games/Pong/pong.js" />
       </list>
     </option>
   </component>
@@ -323,6 +321,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Games" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JSGames" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="audio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -420,9 +436,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28790087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28790087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287172" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -825,26 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content/js/games/Pong/pong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.555555">
-          <caret line="250" column="17" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#63#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/pong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8756757">
-          <caret line="54" column="90" selection-start-line="54" selection-start-column="90" selection-end-line="54" selection-end-column="90" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/content/js/API/GraphicsManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -853,12 +849,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view/pong.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-36.875">
+          <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/content/js/API/Audio.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11064278">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.18973215">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
             <element signature="n#!!doc;n#Audio#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content/js/games/Pong/pong.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49886104">
+          <caret line="172" column="10" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#63#0" expanded="false" />
           </folding>
         </state>
       </provider>

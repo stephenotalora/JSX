@@ -9,6 +9,7 @@ var Pong = (function(){
     var rightPaddle = null, paddle_R_vel= 0.0, rPadColor = util.config.pong.rPadColor;
     var leftPlayerScore = 0, rightPlayerScore = 0;
     var ball = null, initialBallPos = null, ballVel = 0;
+    var padStrikeEffect = null, wallStrikeEffect = null;
 
     // symbolic constants
     var PAD_WIDTH = util.config.pong.PAD_WIDTH;
@@ -159,13 +160,24 @@ var Pong = (function(){
         var MAX_STEP = 15;
 
         // collision detection logic based on table width and height
-        if (ballPos[1] >= (TABLE_HEIGHT - 1) - ball.getRadius()) { ballVel[1] *= -1; } // bottom wall ~ reflect upward
-        else if (ballPos[1] <= ball.getRadius()) { ballVel[1] = -ballVel[1]; } // top wall ~ reflect downward.
-        else if (ballPos[0] >= (TABLE_WIDTH - PAD_WIDTH) - ball.getRadius()) { // ball strikes right paddle
+        if (ballPos[1] >= (TABLE_HEIGHT - 1) - ball.getRadius()) { // bottom wall ~ reflect upward
+            ballVel[1] *= -1;
+            if (wallStrikeEffect != null) {
+                wallStrikeEffect.audio.play();
+            }
+        } else if (ballPos[1] <= ball.getRadius()) { // top wall ~ reflect downward.
+            ballVel[1] = -ballVel[1];
+            if (wallStrikeEffect != null) {
+                wallStrikeEffect.audio.play();
+            }
+        } else if (ballPos[0] >= (TABLE_WIDTH - PAD_WIDTH) - ball.getRadius()) { // ball strikes right paddle
             if (ballPos[1] >= rightPaddle.getPosition()[0][1] && ballPos[1] <= rightPaddle.getPosition()[1][1]) {
                 ballVel[0] = -(ballVel[0] + DIFFICULTY_LEVEL);
                 rightPaddle.setColor('red');
                 collisionDetection.rightUpdateStep = 1;
+                if (padStrikeEffect != null) {
+                    padStrikeEffect.audio.play();
+                }
             } else { // UPDATE LEFT PLAYER SCORE
                 spawnBall(LEFT);
                 ++leftPlayerScore;
@@ -183,6 +195,9 @@ var Pong = (function(){
                 ballVel[0] *= -(1 + DIFFICULTY_LEVEL);
                 leftPaddle.setColor('red');
                 collisionDetection.leftUpdateStep = 1;
+                if (padStrikeEffect != null) {
+                    padStrikeEffect.audio.play();
+                }
             } else { // UPDATE RIGHT PLAYER SCORE ~ and spawn ball in the opposite direction
                 spawnBall(RIGHT);
                 ++rightPlayerScore;
@@ -268,6 +283,14 @@ var Pong = (function(){
 
     return {
         init: function () {
+            // load audio
+            padStrikeEffect = new Audio('strike');
+            padStrikeEffect.preload('../content/audio/blip.wav');
+            wallStrikeEffect = new Audio('wallstrike');
+            wallStrikeEffect.preload('../content/audio/blipf.wav');
+
+
+            // prepare canvas
             canvas = GraphicsManager.createCanvas(
                 "Pong",
                 util.config.pong.targetNode,
