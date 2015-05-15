@@ -1,0 +1,20 @@
+body{ background-color:#fff; font-family: 'Press Start 2P', cursive;  overflow: hidden;}
+.navbar-wrapper{ margin-top: 20px; }
+
+/*#canvas {border: 1px solid black; margin:0 auto; }*/
+
+/* TODO: comment out width and height*/
+#game_container, canvas{
+    position: relative;
+    top:115px;
+    left: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#pOverlay {
+    position: absolute;
+    top: 50px;
+    z-index: 0;
+    margin-left: 40px;
+}

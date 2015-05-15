@@ -11,73 +11,52 @@
 </head>
 <body>
 
-    <!-- BEGIN NAVBAR -->
-    <div class="navbar-wrapper">
-        <div class="container">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">JS Games</a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </nav>
-        </div>
-    </div>
-    <!-- END NAVBAR -->
-
+<!-- BEGIN NAVBAR -->
+<div class="navbar-wrapper">
     <div class="container">
-        <div class="container-fluid" style='background-color: #FFF;'>
-            <div id="game_container"></div>
-        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">JS Games</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
     </div>
+</div>
+<!-- END NAVBAR -->
+
+<div class="container">
+    <div id="pOverlay">
+        <img src="../content/images/pong/pong-3.png" width="1097" height="1136"/>
+    </div>
+    <div class="container-fluid" style='background-color: #FFF;'>
+        <div id="game_container"></div>
+    </div>
+</div>
 
 
 <!-- Script Includes For Space Game -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../content/js/bootstrap/bootstrap.js"></script>
-    <script type="text/javascript" src="../content/js/configs/GameConfigs.js"></script>
-    <script type="text/javascript" src="../content/js/util/GameUtil.js"></script>
-    <script type="text/javascript" src="../content/js/API/Random.js"></script>
-    <script type="text/javascript" src="../content/js/API/Canvas.js"></script>
-    <script type="text/javascript" src="../content/js/API/Audio.js"></script>
-    <script type="text/javascript" src="../content/js/API/GraphicsManager.js"></script>
-    <script type="text/javascript" src="../content/js/games/Pong/PongObjects.js"></script>
-    <!--<script>-->
-        <!--var paddle1 = new Paddle([[0,0],[0,0]], 0, 8, 80, 'red');-->
-        <!--console.log(paddle1.toString());-->
-        <!--var paddle2 = new Paddle([[0,0],[0,0]], 0, 8, 80, 'yellow');-->
-        <!--console.log(paddle2.toString());-->
-        <!--var ball = new Ball([[0,0], [0,0]], 0, 40);-->
-        <!--console.log(ball.toString());-->
-    <!--</script>-->
-
-<script src="../content/js/games/Pong/Pong.js"></script>
-<!--<script type="text/javascript">-->
-    <!--var image = GraphicsManager.loadImage('../images/nebula_blue.f2014.png');-->
-    <!--var canvas = GraphicsManager.createCanvas("Space Ship", 900, 600);-->
-    <!--canvas.setBackgroundColor("black");-->
-    <!--var direction = [canvas.getWidth()/2,canvas.getHeight()/2];-->
-    <!--var velocity = [-80.0/60, 10.0/60];-->
-    <!--canvas.setDrawHandler(function(ctx){-->
-        <!--GraphicsManager.draw.image(ctx,image,[0,0],[canvas.getWidth(), canvas.getHeight()]);-->
-        <!--GraphicsManager.draw.circle(ctx, direction, 40, 2,'black', 'white');-->
-        <!--direction[0] += velocity[0];-->
-        <!--direction[1] += velocity[1];-->
-    <!--});-->
-    <!--canvas.start();-->
-<!--</script>-->
-<!-- End Script Includes -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="../content/js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="../content/js/configs/GameConfigs.js"></script>
+<script type="text/javascript" src="../content/js/util/GameUtil.js"></script>
+<script type="text/javascript" src="../content/js/API/Random.js"></script>
+<script type="text/javascript" src="../content/js/API/Canvas.js"></script>
+<script type="text/javascript" src="../content/js/API/Audio.js"></script>
+<script type="text/javascript" src="../content/js/API/GraphicsManager.js"></script>
+<script type="text/javascript" src="../content/js/games/Pong/PongObjects.js"></script>
+<script type="text/javascript" src="../content/js/games/Pong/Pong.js"></script>
 </body>
 </html>
