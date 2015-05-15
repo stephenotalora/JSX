@@ -1,0 +1,29 @@
+/* Jonathan S. Otalora  - A0894017 */
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+body {
+    background-color: #222222;
+    margin: 0;
+}
+
+#side_nav {
+    position: relative;
+    top: 20px;
+    float: right;
+    width: 250px;
+    height: 600px; /* comment this out */
+    border: thin solid white;
+    padding: 10px;
+}
+
+#container {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#game_bck {
+    position: absolute;
+    z-index: -1;
+    top: -45px;
+    left: -40px;
+}
