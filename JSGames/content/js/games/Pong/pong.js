@@ -285,9 +285,9 @@ var Pong = (function(){
         init: function () {
             // load audio
             padStrikeEffect = new Audio('strike');
-            padStrikeEffect.preload('../content/audio/blip.wav');
+            padStrikeEffect.preload('content/audio/blip.wav');
             wallStrikeEffect = new Audio('wallstrike');
-            wallStrikeEffect.preload('../content/audio/blipf.wav');
+            wallStrikeEffect.preload('content/audio/blipf.wav');
 
 
             // prepare canvas
@@ -310,7 +310,9 @@ var Pong = (function(){
     }
 })();
 
-window.addEventListener('load', function() {
-    Pong.init();
-}, false);
+//window.addEventListener('load', function() {
+//    Pong.init();
+//}, false);
+
+
 

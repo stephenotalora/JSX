@@ -1,29 +1,50 @@
 /* Jonathan S. Otalora  - A0894017 */
 @import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
 body {
-    background-color: #222222;
+    background-color: #3c3c3c;
     margin: 0;
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
 }
 
 #side_nav {
-    position: relative;
+    position: absolute;
+    margin-left: 1150px;
     top: 20px;
-    float: right;
     width: 250px;
     height: 600px; /* comment this out */
     border: thin solid white;
     padding: 10px;
-}
-
-#container {
-    position: relative;
-    left: 20px;
-    top: 20px;
+    z-index: 1;
 }
 
 #game_bck {
     position: absolute;
     z-index: -1;
     top: -45px;
-    left: -40px;
+    left: -30px;
 }
+
+/*#game_bck > img {*/
+    /*width: 90%;*/
+/*}*/
+
+#game_container {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    background-color: black;
+    margin-top: 230px;
+    margin-left: 100px;
+    border: solid thin white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#game_container > canvas {
+    border-radius: 15px;
+    outline: none;
+    border: solid thin white;
+}
+
