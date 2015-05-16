@@ -10,6 +10,7 @@ var Pong = (function(){
     var leftPlayerScore = 0, rightPlayerScore = 0;
     var ball = null, initialBallPos = null, ballVel = 0;
     var padStrikeEffect = null, wallStrikeEffect = null;
+    var uiListener = null;
 
     // symbolic constants
     var PAD_WIDTH = util.config.pong.PAD_WIDTH;
@@ -113,6 +114,8 @@ var Pong = (function(){
             [TABLE_WIDTH/2 - 80, 50], 50,
             'Consolas', 50, true
         );
+
+        if (uiListener) { uiListener(leftPlayerScore, rightPlayerScore); }
     }
 
 
@@ -282,6 +285,10 @@ var Pong = (function(){
     }
 
     return {
+        setUpdateListener: function(listener) {
+            uiListener = listener;
+        },
+
         init: function () {
             // load audio
             padStrikeEffect = new Audio('strike');
