@@ -54,7 +54,7 @@
                 Pong.setUpdateListener(function(lscore, rscore) {
                     score.innerHTML = "P1 - Score = " + lscore + "<br />P2 - Score = " + rscore;
                 });
-                document.body.scrollTop = 50;
+                document.body.scrollTop = 70;
             }, false);
         }, displayMenuAt);
     }
