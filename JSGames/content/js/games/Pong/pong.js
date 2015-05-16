@@ -317,9 +317,4 @@ var Pong = (function(){
     }
 })();
 
-//window.addEventListener('load', function() {
-//    Pong.init();
-//}, false);
-
-
 

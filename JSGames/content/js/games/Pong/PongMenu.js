@@ -3,22 +3,22 @@
  */
 (function(){
     var gameContainer = document.getElementById(GameConfigs.pong.targetNode);
-    $('#side_nav').animate({height: '600px'});
+    var $bar = $('#side_nav');
+    var startAt = 300, displayMenuAt=1700;
+
+    $bar.animate({height: '600px'});
 
     if (gameContainer) {
+        var bgUpdate = 0;
         var colors = ['red', 'white', 'yellow', 'green', 'blue'];
-        var id = setInterval(updateBgColor, 300);
-
-
-        function updateBgColor() {
-            var bg = updateBgColor;
-            bg.update = ++bg.update || 0;
-            if (bg.update < colors.length) {
-                gameContainer.style.backgroundColor = colors[bg.update];
+        var id = setInterval(function() {
+            ++bgUpdate;
+            if (bgUpdate < colors.length) {
+                gameContainer.style.backgroundColor = colors[bgUpdate];
             } else {
                 clearInterval(id);
             }
-        }
+        }, startAt);
 
         setTimeout(function() {
             gameContainer.style.backgroundColor = 'black';
@@ -54,8 +54,9 @@
                 Pong.setUpdateListener(function(lscore, rscore) {
                     score.innerHTML = "P1 - Score = " + lscore + "<br />P2 - Score = " + rscore;
                 });
+                document.body.scrollTop = 50;
             }, false);
-        }, 1900);
+        }, displayMenuAt);
     }
 })();
 

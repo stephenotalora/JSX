@@ -20,7 +20,7 @@ var GameConfigs =  {
         ballRadius: 25,
         lPadColor: '#7FFF00',
         rPadColor: '#1E90FF',
-        PAD_WIDTH: 8.0, PAD_HEIGHT: 80.0,
+        PAD_WIDTH: 10.0, PAD_HEIGHT: 80.0,
         TABLE_WIDTH:900.0, TABLE_HEIGHT:600.0
     }
 };
